@@ -19,13 +19,14 @@ if($message_type != "text") exit;
 
 //返信メッセージ
 if($message_text == "てーば"){
+    $sendType = 2;
     $return_message_text = "「てばさき」じゃねーよｗｗｗ";
 }
 else{
+    $sendType = 1;
     $return_message_text = "「" . $message_text . "」じゃねーよｗｗｗ";
 }
 
-$sendType = 1;
 
 //返信実行
 sending_messages($accessToken, $replyToken, $message_type, $return_message_text, $sendType);
