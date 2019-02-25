@@ -26,6 +26,30 @@ sending_messages($accessToken, $replyToken, $message_type, $return_message_text)
 <?php
 //メッセージの送信
 function sending_messages($accessToken, $replyToken, $message_type, $return_message_text){
+    //---
+    // 確認ダイアログタイプ
+    $send_format_gialog = [
+        'type' => 'template',
+        'altText' => '確認ダイアログ',  // ここの文字列が、LINEの通知に表示されるはず
+        'template' => [
+            'type' => 'confirm',
+            'text' => '送ってきたメッセージはこれで間違えないですか？',
+            'actions' => [
+                [
+                'type' => 'message',
+                'label' => '問題なし',
+                'text' => '問題なし'
+                ],
+                [
+                'type' => 'message',
+                'label' => '問題あり',
+                'text' => '問題あり'
+                ],
+            ]
+        ]
+    ];
+    
+    
     //レスポンスフォーマット
     $response_format_text = [
         "type" => $message_type,
@@ -35,7 +59,7 @@ function sending_messages($accessToken, $replyToken, $message_type, $return_mess
     //ポストデータ
     $post_data = [
         "replyToken" => $replyToken,
-        "messages" => [$response_format_text]
+        "messages" => [$response_format_text, $send_format_gialog]
     ];
  
     //curl実行
