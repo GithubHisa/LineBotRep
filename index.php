@@ -13,19 +13,25 @@ $message_text = $json_object->{"events"}[0]->{"message"}->{"text"};    //メッ�
  
 //メッセージタイプが「text」以外のときは何も返さず終了
 if($message_type != "text") exit;
- 
+
+
 //返信メッセージ
-if($message_text == "てーば")
+$sendType = 0
+if($message_text == "てーば"){
     $return_message_text = "「てばさき」じゃねーよｗｗｗ";
-else
+    $sendType = 1
+}
+else{
     $return_message_text = "「" . $message_text . "」じゃねーよｗｗｗ";
+    $sendType = 2
+}
 
 //返信実行
-sending_messages($accessToken, $replyToken, $message_type, $return_message_text);
+sending_messages($accessToken, $replyToken, $message_type, $return_message_text, $sendType);
 ?>
 <?php
 //メッセージの送信
-function sending_messages($accessToken, $replyToken, $message_type, $return_message_text){
+function sending_messages($accessToken, $replyToken, $message_type, $return_message_text, $sendType){
     //---
     // 確認ダイアログタイプ
     $send_format_gialog = [
@@ -49,7 +55,6 @@ function sending_messages($accessToken, $replyToken, $message_type, $return_mess
         ]
     ];
     
-    
     //レスポンスフォーマット
     $response_format_text = [
         "type" => $message_type,
@@ -57,17 +62,26 @@ function sending_messages($accessToken, $replyToken, $message_type, $return_mess
     ];
  
     //ポストデータ
-    $post_data = [
+    $post_data1 = [
         "replyToken" => $replyToken,
         "messages" => [$response_format_text, $send_format_gialog]
     ];
+    $post_data2 = [
+        "replyToken" => $replyToken,
+        "messages" => [$response_format_text]
+    ];
  
+    
     //curl実行
     $ch = curl_init("https://api.line.me/v2/bot/message/reply");
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+    if($sendType == 1 )
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data1));
+    else
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data2));
+    
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/json; charser=UTF-8',
         'Authorization: Bearer ' . $accessToken
