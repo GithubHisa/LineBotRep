@@ -19,11 +19,11 @@ if($message_type != "text") exit;
 $sendType = 0
 if($message_text == "てーば"){
     $return_message_text = "「てばさき」じゃねーよｗｗｗ";
-    $sendType = 1
+    $sendType = 1;
 }
 else{
     $return_message_text = "「" . $message_text . "」じゃねーよｗｗｗ";
-    $sendType = 2
+    $sendType = 2;
 }
 
 //返信実行
