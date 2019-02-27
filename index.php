@@ -22,7 +22,12 @@ if($message_text == "てーば"){
     $sendType = 1;
     $return_message_text = "「てばさき」じゃねーよｗｗｗ";
 }
-else{
+elseif($message_text == "確認"){
+    $sendType = 3;
+    $return_message_text = "「てばさき」じゃねーよｗｗｗ";
+}
+elseif
+{
     $sendType = 2;
     $return_message_text = "「" . $message_text . "」じゃねーよｗｗｗ";
 }
@@ -56,6 +61,28 @@ function sending_messages($accessToken, $replyToken, $message_type, $return_mess
             ]
         ]
     ];
+    //ボタン
+    $response_format_button = [
+        'type' => 'template',
+        'altText' => 'ボタン', 
+        'template' => [
+             'type' => 'buttons',
+             'title' => 'タイトルです',
+             'text' => '選択してね', 
+            'actions' => [
+                 [ 
+                    'type' => 'postback', 
+                    'label' => 'webhookにpost送信', 
+                    'data' => 'value' 
+                ],
+                 [
+                     'type' => 'uri',
+                     'label' => 'googleへ移動', 
+                     'uri' => 'https://google.com' 
+                 ]
+              ]
+          ]         
+    ];
     
     //レスポンスフォーマット
     $response_format_text = [
@@ -72,7 +99,11 @@ function sending_messages($accessToken, $replyToken, $message_type, $return_mess
         "replyToken" => $replyToken,
         "messages" => [$response_format_text]
     ];
-     
+    $post_data3 = [
+        "replyToken" => $replyToken,
+        "messages" => [$response_format_button]
+    ];
+
     //curl実行
     $ch = curl_init("https://api.line.me/v2/bot/message/reply");
     curl_setopt($ch, CURLOPT_POST, true);
@@ -80,8 +111,10 @@ function sending_messages($accessToken, $replyToken, $message_type, $return_mess
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     if($sendType==1)
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data1));
-    else
+    elseif($sendType==2)
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data2));
+    elseif($sendType==3)
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data3));
     
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/json; charser=UTF-8',
