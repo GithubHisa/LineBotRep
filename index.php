@@ -36,7 +36,7 @@ if($message_text == "てーば"){
         // UTF8へエンコード
         $emoticon =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
         
-        $return_message_text = "『" . $message_text . "』" . $emoticon;
+        $return_message_text = "『" . $message_text . "』";
     }
 }
 
