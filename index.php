@@ -21,13 +21,9 @@ if($message_type != "text") exit;
 if($message_text == "てーば"){
     $sendType = 1;
     $return_message_text = "「てばさき」じゃねーよｗｗｗ";
-}
-elseif($message_text == "確認"){
+}elseif($message_text == "確認"){
     $sendType = 3;
-    $return_message_text = "「てばさき」じゃねーよｗｗｗ";
-}
-elseif
-{
+}else{
     $sendType = 2;
     $return_message_text = "「" . $message_text . "」じゃねーよｗｗｗ";
 }
