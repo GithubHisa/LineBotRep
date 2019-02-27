@@ -66,11 +66,6 @@ function sending_messages($accessToken, $replyToken, $message_type, $return_mess
              'title' => 'タイトルです',
              'text' => '選択してね', 
             'actions' => [
-                 [ 
-                    'type' => 'postback', 
-                    'label' => 'webhookにpost送信', 
-                    'data' => 'value' 
-                ],
                  [
                      'type' => 'uri',
                      'label' => 'googleへ移動', 
