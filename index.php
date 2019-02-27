@@ -33,7 +33,7 @@ if($message_text == "てーば"){
         $bin = pack('H*', (str_repeat('0', 8 - strlen($code)) . $code));
         $char =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
         
-        $return_message_text = "『" . $message_text . "』" . $char;
+        $return_message_text =  $char;
     }
 }
 
