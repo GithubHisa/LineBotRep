@@ -28,12 +28,6 @@ if($message_text == "てーば"){
     $return_message_text = "「" . $message_text . "」じゃねーよｗｗｗ";
     
     if($message_text == "愛"){
-        // 0xを抜いた数字の部分
-        $code = '100078';
-        // 16進エンコードされたバイナリ文字列をデコード
-        $bin = hex2bin(str_repeat('0', 8 - strlen($code)) . $code);
-        // UTF8へエンコード
-        //$return_message_text = mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
         $return_message_text = "『" . $message_text . "』"
     }
 }
