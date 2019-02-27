@@ -28,7 +28,7 @@ if($message_text == "てーば"){
     $return_message_text = "「" . $message_text . "」じゃねーよｗｗｗ";
     
     if($message_text == "愛"){
-        $return_message_text = "『" . $message_text . "』"
+        $return_message_text = "『" . $message_text . "』";
     }
 }
 
