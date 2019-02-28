@@ -28,7 +28,7 @@ if($message_text == "てーば"){
     $return_message_text = "「" . $message_text . "」じゃねーよｗｗｗ";
     
     if($message_text == "愛"){
-        $return_message_text = hex2bin("F09F8C80") . " - " . json_decode('["\uD83C\uDF00"]', true)[0];
+        $return_message_text = hex2bin("F09F8C80") . " - " . json_decode('["\uD83C\uDF53"]', true)[0];
     }
 }
 
