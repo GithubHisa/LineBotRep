@@ -28,8 +28,7 @@ if($message_text == "てーば"){
     $return_message_text = "「" . $message_text . "」じゃねーよｗｗｗ";
     
     if($message_text == "愛"){
-
-        $return_message_text = mb_convert_encoding(hex2bin(sprintf("%08s", '1F914')), 'UTF-8', 'UTF-32');
+        $return_message_text = hex2bin("F09F8C80");
     }
 }
 
